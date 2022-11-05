@@ -39,6 +39,8 @@ const getHandler = (request, response, next) => {
 app.get("/", getHandler);
 
 app.get("/users", (request, response) => {
+  //
+  //
   response.json({
     message: "Success full",
     url: request.url,
@@ -47,6 +49,8 @@ app.get("/users", (request, response) => {
 });
 
 app.get("/students", (request, response) => {
+  //
+  //
   response.json({
     url: request.url,
   });
