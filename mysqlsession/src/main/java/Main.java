@@ -9,8 +9,7 @@ class Main {
 
 
         ArrayList<Student> students = Student.getAllStudents();
-        for (Student student :
-                students) {
+        for (Student student : students) {
             System.out.println(student);
         }
     }

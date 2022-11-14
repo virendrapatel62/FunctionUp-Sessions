@@ -14,13 +14,13 @@ public class Student {
         try {
             Connection connection = DataBaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.executeQuery();
+            statement.executeUpdate();
             System.out.println("Table Created...");
+            connection.close();
         } catch (Exception exception) {
             System.err.println(exception.getMessage());
         }
     }
-
     private String firstName;
     private String lastName;
     private int id;
@@ -55,19 +55,25 @@ public class Student {
         while (keys.next()) {
             this.setId(keys.getInt(1));
         }
+        connection.close();
     }
 
     public static ArrayList<Student> getAllStudents() throws Exception {
-        String query = "SELECT firstName , lastName , id from `students`;";
-        Connection connection = DataBaseConnection.getConnection();
-        PreparedStatement statement = connection.prepareStatement(query);
-        ResultSet results =statement.executeQuery();
         ArrayList<Student> students = new ArrayList<>();
-        while (results.next()) {
-            Student student = new Student(results.getString(1) , results.getString(2) , results.getInt(3));
-            students.add(student);
-        }
+        try {
+            String query = "SELECT firstName , lastName , id from `students`;";
+            Connection connection = DataBaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet results =statement.executeQuery();
 
+            while (results.next()) {
+                Student student = new Student(results.getString(1) , results.getString(2) , results.getInt(3));
+                students.add(student);
+            }
+            connection.close();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         return students;
     }
 
