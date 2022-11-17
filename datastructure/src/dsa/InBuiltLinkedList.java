@@ -1,6 +1,7 @@
-package dsa;
 
+package dsa;
 import java.util.LinkedList;
+
 
 public class InBuiltLinkedList {
     public static void main(String[] args) {

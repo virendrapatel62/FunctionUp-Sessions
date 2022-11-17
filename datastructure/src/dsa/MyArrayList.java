@@ -6,6 +6,8 @@ import java.util.Arrays;
 class ArrayListWithArray{
     int[] data = new int[5];
     int size = 0;
+
+//    20 21=> 40 41=> 80=>1000 1001 => 2000
     public void add(int item){
         if(size == this.data.length){
             int[] newArray = Arrays.copyOf(this.data , this.data.length * 2); //[20]
