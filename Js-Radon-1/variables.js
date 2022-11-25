@@ -35,3 +35,18 @@ somtihing();
 // }
 
 // task();
+
+const student = { name: "virendra", age: 23 };
+
+let s2 = student; // ref
+
+s2.name = "sandeep";
+
+console.log(student == s2);
+
+const emp = { name: { firstName: "virendra" }, age: 23 };
+// let emp2 = JSON.parse(JSON.stringify(emp));
+let emp2 = { ...emp, name: { ...emp.name } };
+
+emp2.name.firstName = "emp2";
+console.log(emp, emp2);
