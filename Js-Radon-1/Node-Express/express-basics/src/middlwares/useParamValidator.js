@@ -1,4 +1,6 @@
+const { users } = require("../user");
 exports.userValidator = (request, response, next) => {
+  console.log("middelware validaror");
   const { id } = request.params;
   //   const { name, age } = request.body;
   if (!id) {
