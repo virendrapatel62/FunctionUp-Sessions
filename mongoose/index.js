@@ -19,6 +19,9 @@ const studentSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  phones: {
+    type: [Number],
+  },
 });
 
 const Student = mongoose.model("Student", studentSchema);
@@ -103,4 +106,34 @@ async function deleteStudent(id) {
 }
 
 // deleteStudent("63861978f199a023e98a0e5f");
-getStudentById("63861978f199a023e98a0e5f");
+// getStudentById("63861978f199a023e98a0e5f");
+
+// new Student({
+//   name: "Virendra",
+//   email: "patelvirnedra90@gmail.com",
+//   phones: [],
+// })
+//   .save()
+//   .then((result) => {
+//     console.log(result);
+//   });
+
+Student.findOneAndUpdate(
+  {
+    _id: "6386200d3caec881bbf5f0bd",
+  },
+  {
+    $set: {
+      name: "new-name",
+    },
+    // $push: {
+    //   phones: false,
+    // },
+    $pop: {
+      phones: true,
+    },
+  },
+  { new: true }
+).then(console.log);
+
+// Student.findById("63861eaece91ab4720022e87").then(console.log);
