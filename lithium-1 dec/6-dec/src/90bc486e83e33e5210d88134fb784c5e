@@ -1,0 +1,19 @@
+const todos = ["Learn React", "Learn Angular"];
+
+function Todos() {
+  const onClick = () => {
+    console.log("Helloo World..");
+  };
+  return todos.map((todo) => {
+    return <p onClick={onClick}>{todo}</p>;
+  });
+}
+
+function TodoApp() {
+  return (
+    <div>
+      <h1>Todo App</h1>
+      <Todos></Todos>
+    </div>
+  );
+}
