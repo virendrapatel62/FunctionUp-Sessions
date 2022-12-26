@@ -23,6 +23,7 @@ function _Factorial({ number, onChange, factorial }) {
   );
 }
 
+// const Factorial = _Factorial;
 const Factorial = React.memo(_Factorial);
 
 function App() {
@@ -32,16 +33,22 @@ function App() {
     return getFactorial(number);
   }, [number]);
 
-  const handleChange = useCallback((event) => {
-    setNumber(event.target.value);
-  }, []);
+  // const factorial = getFactorial(number);
 
-  // const handleChange = useMemo(() => {
-  //   console.log("MEMO FUNCTION ");
-  //   return (event) => {
-  //     setNumber(event.target.value);
-  //   };
+  // const handleChange = useCallback((event) => {
+  //   setNumber(event.target.value);
   // }, []);
+
+  // const handleChange = (event) => {
+  //   setNumber(event.target.value);
+  // };
+
+  const handleChange = useMemo(() => {
+    console.log("MEMO FUNCTION ");
+    return (event) => {
+      setNumber(event.target.value);
+    };
+  }, []);
 
   const handleClick = (value) => {
     const newValue = counter + value;
