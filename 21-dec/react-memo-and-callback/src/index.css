@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  padding: 20px;
+  margin: 20px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.counter {
+  display: flex;
+}
+
+.counter span {
+  margin: 20px;
+  flex-grow: 1;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid rgb(112, 85, 85);
+  border-radius: 10px;
+}
