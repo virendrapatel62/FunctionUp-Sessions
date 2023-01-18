@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  background-color: tomato;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.header a {
+  text-decoration: none;
+  color: white;
+}
+
+.header div {
+  margin-right: 20px;
+  color: white;
+}
