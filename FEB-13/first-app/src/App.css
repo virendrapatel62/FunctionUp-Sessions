@@ -25,3 +25,23 @@
 .bg-tomato {
   background-color: tomato;
 }
+
+table {
+  width: 100%;
+  font-size: 1.5em;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.actions button {
+  padding: 5px;
+  background-color: rgb(25, 124, 25);
+
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  margin: 10px;
+}
