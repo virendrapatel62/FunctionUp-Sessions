@@ -1,21 +1,25 @@
 .product-wrapper {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
 .product-card {
   display: flex;
-  height: 300px;
-  width: 300px;
   justify-content: center;
   align-items: center;
   color: white;
   border-radius: 10px;
   margin: 10px;
   background-color: tomato;
-  flex-direction: column;
+  flex-direction: row;
   color: black;
   border: 1px solid gray;
+}
+
+.product-card img {
+  height: 60px;
+  width: 60px;
 }
 
 .bg-dodgerblue {
@@ -44,4 +48,14 @@ table {
   font-weight: 500;
   font-size: 20px;
   margin: 10px;
+}
+
+.form-wrapper {
+  border: 1px solid gray;
+}
+
+.form-wrapper input {
+  width: 90%;
+  margin: 10px;
+  font-size: 20px;
 }

@@ -5,29 +5,31 @@ import { useEffect } from "react";
 
 import axios from "axios";
 import { useState } from "react";
+import UserForm from "./ui/UserForm";
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState({
-    name: "Viren",
-  });
+
+  const [selectedUser, setSelectedUser] = useState({});
 
   useEffect(() => {
     console.log("Selcted User Changed..");
   }, [selectedUser]);
 
   useEffect(() => {
-    console.log("App Mounted"); // On Component Mount
-    axios.get("https://jsonplaceholder.typicode.com/users").then((response) => {
-      setUsers(response.data);
-    });
+    // console.log("App Mounted"); // On Component Mount
+    // axios.get("https://jsonplaceholder.typicode.com/users").then((response) => {
+    //   setUsers(response.data);
+    // });
 
     return () => {};
   }, []);
 
+  const [activePage, setActivePage] = useState(3);
+
   const handleUserClick = (user) => {
-    console.log("From App", user);
     setSelectedUser(user);
+    setActivePage(2);
   };
 
   const handleOnDelete = (user) => {
@@ -43,52 +45,49 @@ function App() {
     setUsers(updated);
   };
 
+  const handleOnCreate = (user) => {
+    setUsers([user, ...users]);
+  };
+
   console.log({ users });
-  if (users && Array.isArray(users) && users.length > 0) {
-    return (
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
+  return (
+    <div>
+      <div>
+        <button onClick={() => setActivePage(1)}>List</button>
+        <button onClick={() => setActivePage(2)}>Details</button>
+        <button onClick={() => setActivePage(3)}>Form</button>
+      </div>
+
+      {activePage == 1 && (
         <div>
-          <Users
-            onDelete={handleOnDelete}
-            onUserClick={handleUserClick}
-            users={users}
-          />
+          {users.length > 0 ? (
+            <Users
+              onDelete={handleOnDelete}
+              onUserClick={handleUserClick}
+              users={users}
+            />
+          ) : (
+            <h1>No Users</h1>
+          )}
         </div>
-        <div
-          style={{
-            width: "50%",
-          }}
-        >
+      )}
+      {activePage == 2 && (
+        <div>
           <h1>User Details</h1>
           <hr />
-
-          <table>
-            <tr>
-              <th>Id</th>
-              <td>{selectedUser.id}</td>
-            </tr>
-            <tr>
-              <th>Name</th>
-              <td>{selectedUser.name}</td>
-            </tr>
-            <tr>
-              <th>Email</th>
-              <td>{selectedUser.email}</td>
-            </tr>
-            <tr>
-              <th>Phone</th>
-              <td>{selectedUser.phone}</td>
-            </tr>
-          </table>
+          <h1>
+            <pre>{JSON.stringify(selectedUser, null, 3)}</pre>
+          </h1>
         </div>
-      </div>
-    );
-  }
-  return <h1>No Users</h1>;
+      )}
+      {activePage == 3 && (
+        <div className="form-wrapper">
+          <hr />
+          <UserForm onCreate={handleOnCreate} />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default App;

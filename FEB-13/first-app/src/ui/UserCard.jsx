@@ -25,10 +25,12 @@ function UserCard(props) {
       }`}
     >
       <img src={props.image} alt="" />
-      <h3 title={props.name}>{name}</h3>
-      <div className="actions">
-        <button onClick={handleOnClick}>Show More</button>
-        <button onClick={props.onDelete}>Remove</button>
+      <div>
+        <h3 title={props.name}>{name}</h3>
+        <div className="actions">
+          <button onClick={handleOnClick}>Show More</button>
+          <button onClick={props.onDelete}>Remove</button>
+        </div>
       </div>
     </div>
   );
