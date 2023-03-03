@@ -1,27 +1,19 @@
-const counter = (int) => {
-  let count = int;
+console.log("Hello");
 
-  const inc = () => {
-    count++;
-  };
-  const dec = () => {
-    count--;
-  };
+if (true) {
+  console.log("TRUE");
+} else {
+  console.log("FALSE");
+}
 
-  const getCount = () => count;
+function doIT() {
+  console.log("Doing.. IT");
 
-  return {
-    inc,
-    dec,
-    getCount,
-  };
-};
-const { inc, dec, getCount } = counter(20);
+  return 343;
+}
 
-console.log(getCount());
-inc();
-inc();
-console.log(getCount());
-dec();
-dec();
-console.log(getCount());
+for (let index = 0; index < 1; index++) {
+  console.log("Loop");
+}
+
+const result = doIT();
