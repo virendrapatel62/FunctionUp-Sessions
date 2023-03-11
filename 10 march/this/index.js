@@ -37,4 +37,8 @@ function doThis(task) {
   task();
 }
 
-doThis(s1.getInfo.bind(s1));
+// doThis(s1.getInfo.bind(s1));
+
+const responsePromise = fetch("https://jsonplaceholder.typicode.com/posts");
+
+// responsePromise.then();
