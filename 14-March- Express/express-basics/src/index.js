@@ -16,15 +16,6 @@ app.listen(3000, () => {
   console.log("Ready ☑️");
 });
 
-app.get("/", (request, response) => {
-  console.log(request.url);
-  const { url } = request;
-  response.json({
-    url,
-    date: new Date().toLocaleDateString(),
-  });
-});
-
 app.get(
   "/data-passing",
 
@@ -50,6 +41,18 @@ app.get(
   }
 );
 
+app.get("/", (_, response) => {
+  console.log(__dirname + "/index.html");
+
+  response.sendFile(__dirname + "/index.html");
+});
+
+const multer = require("multer");
+const upload = multer();
+app.post("/create", upload.none(), (request, response) => {
+  console.log(request.body.firstName);
+  response.json("Message");
+});
 app.use("*", (request, response, next) => {
   response.json("Not -found , FRom LASTMIDDLEWARE");
 });
