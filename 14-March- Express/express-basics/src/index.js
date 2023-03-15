@@ -1,16 +1,53 @@
-console.log("Hello Express");
 const studentRouter = require("./routers/student");
 const courseRouter = require("./routers/course");
 
+const { createUser, getUsers, getUserByEmail } = require("../data/user");
+const { registerMiddlewares } = require("../middlewares");
+const {
+  errorHandlerMiddleware,
+} = require("../middlewares/errorHandlerMiddleware");
+const { authMiddleware } = require("../middlewares/authMiddlewares");
+const { ApiError } = require("../lib/ApiError");
+const { sign } = require("jsonwebtoken");
+
 const app = require("express")();
-const { json } = require("express");
 
-app.use(json());
+registerMiddlewares(app);
 
-app.use("/students", studentRouter);
+app.use("/students", authMiddleware, studentRouter);
+app.use("/courses", authMiddleware, courseRouter);
 
-// app.use("/students", express.json(), studentRouter);
-// app.use("/students", express.json(), courseRouter);
+app.post("/accounts/register", (request, response) => {
+  const user = request.body;
+  createUser(user).then(() => {
+    response.json({
+      message: "user created",
+    });
+  });
+});
+app.post("/accounts/login", (request, response, next) => {
+  const { email, password } = request.body;
+  getUserByEmail(email)
+    .then((user) => {
+      response.json({
+        message: "Login Sucess",
+        token: sign(
+          {
+            email: user.email,
+          },
+          process.env.JWT_SECRET
+        ),
+      });
+    })
+    .catch((err) => {
+      response.status(404);
+      return next(
+        new ApiError("", {
+          message: "invalid email paswordd",
+        })
+      );
+    });
+});
 
 app.listen(3000, () => {
   console.log("Ready ☑️");
@@ -41,18 +78,4 @@ app.get(
   }
 );
 
-app.get("/", (_, response) => {
-  console.log(__dirname + "/index.html");
-
-  response.sendFile(__dirname + "/index.html");
-});
-
-const multer = require("multer");
-const upload = multer();
-app.post("/create", upload.none(), (request, response) => {
-  console.log(request.body.firstName);
-  response.json("Message");
-});
-app.use("*", (request, response, next) => {
-  response.json("Not -found , FRom LASTMIDDLEWARE");
-});
+app.use(errorHandlerMiddleware);

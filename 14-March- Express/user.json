@@ -1,0 +1,6 @@
+[
+  { "email": "virendra@gmail.com", "admin": true, "password": 123456 },
+  { "email": "sandeep@gmail.com", "staff": true, "password": 123456 },
+  { "email": "harsh@gmail.com", "password": 123456 },
+  { "email": "sumiut@gmail.com", "password": 123456 }
+]

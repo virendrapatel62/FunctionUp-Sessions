@@ -1,14 +1,28 @@
 const studentRouter = require("express").Router();
 const express = require("express");
 const crypto = require("crypto");
+const { ApiError } = require("../../lib/ApiError");
+const { adminAuthMiddleware } = require("../../middlewares/authMiddlewares");
 const students = [
   { id: 1, name: "Virendra" },
   { id: 2, name: "Sandeep" },
 ];
 
 studentRouter.get("/", (request, response) => {
-  const { url, method } = request;
-  response.json({
+  if (
+    Object.keys(request.query).length &&
+    request.query.orderBy != "firstName"
+  ) {
+    return next(
+      new ApiError(" Invalid Query", {
+        message: "Invalid Query",
+        allowed: ["firstName"],
+      })
+    );
+  }
+
+  console.log("Students");
+  return response.json({
     students,
   });
 });
@@ -68,6 +82,15 @@ studentRouter.put("/:id", (request, response) => {
   });
 });
 studentRouter.patch("/", (request, response) => {
+  const { url, method } = request;
+  response.json({
+    url,
+    method,
+    students: ["Virendra"],
+    date: new Date().toLocaleDateString(),
+  });
+});
+studentRouter.delete("/:id", adminAuthMiddleware, (request, response) => {
   const { url, method } = request;
   response.json({
     url,

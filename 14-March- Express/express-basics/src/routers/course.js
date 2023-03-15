@@ -1,7 +1,20 @@
 const courseRouter = require("express").Router();
+const { ApiError } = require("../../lib/ApiError");
 
-courseRouter.get("/courses", (request, response) => {
+courseRouter.get("/", (request, response, next) => {
   const { url } = request;
+
+  if (request.query.orderBy != "title") {
+    response.status(500);
+    next(
+      new ApiError(" Invalid Query", {
+        message: "Invalid Query",
+        allowed: ["title"],
+      })
+    );
+    return;
+  }
+
   response.json({
     url,
     courses: ["Angular"],
@@ -9,7 +22,7 @@ courseRouter.get("/courses", (request, response) => {
   });
 });
 
-courseRouter.post("/courses", (request, response) => {
+courseRouter.post("/", (request, response) => {
   const { url, method } = request;
   response.json({
     url,
