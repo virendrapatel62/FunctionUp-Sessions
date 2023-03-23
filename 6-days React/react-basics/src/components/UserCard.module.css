@@ -1,0 +1,12 @@
+.users {
+  color: dodgerblue;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.users > div {
+  border: 1px solid rgb(193, 186, 186);
+  padding: 1rem;
+  font-size: 20px;
+}

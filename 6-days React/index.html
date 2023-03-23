@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="counterbutton">Click me</button>
+    <button id="counterbutton2">Click me AGain</button>
+    <h1 id="value"></h1>
+
+    <ul id="list"></ul>
+
+    <section>
+      <h1></h1>
+      <div>
+        <div>
+          <div></div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<style>
+  section > div {
+    color: red;
+  }
+</style>
+<script>
+  const button = document.getElementById("counterbutton");
+  const button2 = document.getElementById("counterbutton2");
+  const h1 = document.getElementById("value");
+  const list = document.getElementById("list");
+
+  button.onclick = function () {
+    const li = document.createElement("li");
+    li.innerHTML = crypto.randomUUID();
+
+    li.onclick = () => {
+      li.remove();
+    };
+    list.appendChild(li);
+  };
+</script>
