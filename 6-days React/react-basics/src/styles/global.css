@@ -1,0 +1,52 @@
+body {
+  padding: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(201, 197, 195);
+}
+
+.alert {
+  border: 1px solid rgb(130, 122, 122);
+  padding: 0.6rem;
+  margin: 0.4rem;
+  border-radius: 1rem;
+}
+.alert-success {
+  color: green;
+  background-color: rgba(0, 128, 0, 0.233);
+}
+.alert-danger {
+  color: rgb(128, 19, 0);
+  background-color: rgba(128, 55, 0, 0.233);
+}
+
+.btn {
+  color: white;
+  padding: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.btn-success {
+  background-color: rgb(32, 132, 52);
+  border: 1px solid rgb(20, 108, 39);
+}
+.btn-tomato {
+  background-color: rgb(234, 82, 55);
+  border: 1px solid rgb(159, 54, 36);
+}
+
+button {
+  margin: 5px;
+}
+
+.input-group {
+  padding: 5px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-right: 20px;
+  margin-bottom: 5px;
+}
