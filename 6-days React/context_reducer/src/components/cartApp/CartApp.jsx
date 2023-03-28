@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 const CartContext = createContext();
 
@@ -23,12 +29,39 @@ const useCartActions = () => {
 export default function CartApp() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [value, setValue] = useState({
+    products: [],
+    cart: [],
+  });
+
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (!isFirstRender.current) {
+      localStorage.setItem("app-data", JSON.stringify(value));
+    } else {
+      const appData = JSON.parse(localStorage.getItem("app-data"));
+      setCart(appData.cart);
+      setProducts(appData.products);
+    }
+
+    isFirstRender.current = false;
+  }, [value]);
+
+  useEffect(() => {
+    setValue({
+      ...value,
+      products,
+      cart,
+    });
+  }, [products, cart]);
 
   const addToCart = (id) => {
     setCart(Array.from(new Set([...cart, id])));
   };
   const removeFromCart = (id) => {
     cart.splice(cart.indexOf(id), 1);
+
     setCart([...cart]);
   };
 
@@ -46,25 +79,45 @@ export default function CartApp() {
    * cart : [2 , 3, 5, 6]
    */
 
-  const value = {
-    products: products,
-    cart: cart,
-    addToCart,
-    isInCart,
-    removeFromCart,
-  };
-
   return (
-    <CartContext.Provider value={value}>
+    <CartContext.Provider
+      value={{
+        ...value,
+        removeFromCart,
+        isInCart,
+        addToCart,
+      }}
+    >
       <Header />
       <HomePage />
     </CartContext.Provider>
   );
 }
 
+function sendCartAddRequest() {
+  return new Promise((resolve, rej) => {
+    console.log("Sending Server Request");
+    setTimeout(() => {
+      console.log("Got Server Response");
+
+      resolve();
+    }, 2000);
+  });
+}
+
 function Product({ product }) {
   const { addToCart, isInCart, removeFromCart } = useCartActions();
 
+  function _addToCart(id) {
+    addToCart(id);
+    sendCartAddRequest(id)
+      .then(() => {
+        console.log("now product added");
+      })
+      .catch(() => {
+        removeFromCart(id);
+      });
+  }
   return (
     <div>
       <h3>{product.title}</h3>
@@ -76,7 +129,7 @@ function Product({ product }) {
             Remove from Cart
           </button>
         ) : (
-          <button onClick={() => addToCart(product.id)}>Add To Cart</button>
+          <button onClick={() => _addToCart(product.id)}>Add To Cart</button>
         )}
       </div>
     </div>
