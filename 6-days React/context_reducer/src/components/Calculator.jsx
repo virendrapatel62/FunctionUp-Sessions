@@ -17,11 +17,16 @@ export default function Calculator() {
       number2: actionTypes.NUMBER_TWO_CHANGED,
     };
     let newValue = state.inputs[name];
+    console.log({ name });
     let actionType = types[name];
     event.deltaY < 0 ? newValue++ : newValue--;
 
     console.log(`${onInputChange.name} : going to dispatch [${actionType}]`);
 
+    console.log({
+      type: actionType,
+      payload: newValue,
+    });
     dispatch({
       type: actionType,
       payload: newValue,
