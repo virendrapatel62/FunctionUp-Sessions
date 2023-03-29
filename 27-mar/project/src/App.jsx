@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import CounterAppWithContext from "./components/contexts/CounterAppWithContext";
 import { EffectExample } from "./components/UseEffectExample";
 import { ReducerExaple } from "./components/UseReducerExample";
 import { RefExample } from "./components/UseRefExample";
@@ -11,13 +12,15 @@ function App() {
   }
   return (
     <div>
-      <button onClick={toggleEffectExample}>Toggle Effect</button>
+      {/* <button onClick={toggleEffectExample}>Toggle Effect</button> */}
 
       {/* <StateExample /> */}
       {/* {showEffectExample && <EffectExample />} */}
 
       {/* <RefExample /> */}
-      <ReducerExaple />
+      {/* <ReducerExaple /> */}
+
+      <CounterAppWithContext />
     </div>
   );
 }
