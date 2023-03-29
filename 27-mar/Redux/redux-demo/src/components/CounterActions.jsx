@@ -1,17 +1,18 @@
 import { useDispatch } from "react-redux";
+import { counterActions } from "../store/actions";
 
 export function CouterAction() {
   const dispatch = useDispatch();
 
   const inc = (value = 1) => {
     dispatch({
-      type: "INC",
+      type: counterActions.inc,
       payload: value,
     });
   };
   const dec = () => {
     dispatch({
-      type: "DEC",
+      type: counterActions.dec,
     });
   };
   return (
