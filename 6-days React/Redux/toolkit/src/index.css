@@ -14,3 +14,11 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid gray;
+}

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { todosActions } from "../../store/actions";
+import { todoSlice } from "../../store/reducers/todosSlice";
 
 export function TodoForm() {
   const inputRef = useRef();
@@ -9,11 +10,7 @@ export function TodoForm() {
   const addTodo = (event) => {
     const value = inputRef.current.value;
     if (event.keyCode == 13 && value.trim()) {
-      dispatch({
-        type: todosActions.addTodo,
-        payload: value,
-      });
-
+      dispatch(todoSlice.actions.addTodo(value));
       inputRef.current.value = "";
     }
   };

@@ -1,14 +1,12 @@
-import { createStore, combineReducers, compose } from "redux";
-import { counterReducer } from "./reducers/counter-reducer";
-import { todosReducer } from "./reducers/todos-reducer";
+import { configureStore } from "@reduxjs/toolkit";
+// import { counterReducer } from "./reducers/counter-reducer";
+import { todoSlice } from "./reducers/todosSlice";
+import { usersSlice } from "./reducers/usersSlice";
 
-const combinedReducer = combineReducers({
-  counter: counterReducer,
-  todos: todosReducer,
+export const store = configureStore({
+  // counter: counterReducer,
+  reducer: {
+    todos: todoSlice.reducer,
+    users: usersSlice.reducer,
+  },
 });
-
-export const store = createStore(
-  combinedReducer,
-  {},
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
