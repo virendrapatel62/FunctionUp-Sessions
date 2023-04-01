@@ -40,23 +40,23 @@ export default function Memoization() {
     }
   };
 
-  // const handleDelete = useCallback((id) => {
-  //   setStudens((students) =>
-  //     students.filter((item, index) => {
-  //       return item.id !== id;
-  //     })
-  //   );
-  // }, []);
-
-  const handleDelete = useMemo(() => {
-    return (id) => {
-      setStudens((students) =>
-        students.filter((item, index) => {
-          return item.id !== id;
-        })
-      );
-    };
+  const handleDelete = useCallback((id) => {
+    setStudens((students) =>
+      students.filter((item, index) => {
+        return item.id !== id;
+      })
+    );
   }, []);
+
+  // const handleDelete = useMemo(() => {
+  //   return (id) => {
+  //     setStudens((students) =>
+  //       students.filter((item, index) => {
+  //         return item.id !== id;
+  //       })
+  //     );
+  //   };
+  // }, []);
 
   return (
     <div className="border">
