@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./common.css" />
+
+    <!--
+
+        row => MAIN AXIX - X , SEC = Y
+        colo => MAIN AXIX - Y , SEC = X
+
+        jC => Main Axix
+      -->
+    <style>
+      body {
+        background-color: black;
+      }
+      main {
+        border: 1px solid white;
+        display: flex;
+        flex-direction: row-reverse;
+        flex-direction: row;
+        /* flex-direction: column; */
+
+        /* flex-direction: column-reverse; */
+        height: 100vh;
+
+        align-items: center;
+        justify-content: center;
+      }
+
+      div {
+        height: 50px;
+        width: 50px;
+        border: 1px solid black;
+        text-align: center;
+        font-size: 40px;
+      }
+
+      .d,
+      .e {
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <main class="bg-blue">
+      <div class="bg-tomato">1</div>
+      <div class="bg-tomato">2</div>
+      <div class="bg-tomato">3</div>
+      <div class="bg-tomato d">4</div>
+      <div class="bg-tomato e">5</div>
+      <div class="bg-tomato">6</div>
+      <div class="bg-tomato">7</div>
+    </main> -->
+
+    <section>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>5</p>
+      <p class="s-p">6</p>
+      <p>7</p>
+      <p>8</p>
+      <p>9</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+      <p>Lorem ipsum dolor sit.</p>
+    </section>
+  </body>
+
+  <style>
+    section {
+      background-color: black;
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+    }
+
+    section p {
+      border: 1px solid;
+      padding: 10px;
+      background-color: dodgerblue;
+      margin: 2px;
+      color: white;
+      border-radius: 10px;
+    }
+
+    .s-p {
+      grid-column-start: 2;
+      grid-column-end: 5;
+      grid-row-start: 2;
+      grid-row-end: 6;
+      background-color: tomato;
+    }
+  </style>
+</html>
