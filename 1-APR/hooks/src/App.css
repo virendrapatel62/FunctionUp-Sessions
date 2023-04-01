@@ -1,0 +1,12 @@
+.student-list-item {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  border-bottom: 1px solid white;
+  padding: 0 20px 10px;
+}
+
+.border {
+  border: 1px solid white;
+  padding: 10px;
+}
