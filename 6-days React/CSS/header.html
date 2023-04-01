@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      :root {
+        --primary: dodgerblue;
+      }
+      /* row => X  main , Y Secon  */
+      /* col => Y main , X sec */
+
+      main {
+        background-color: var(--primary);
+        height: 20rem;
+        display: flex;
+        flex-direction: row;
+        /* flex-direction: column; */
+        justify-content: center;
+        align-items: center;
+        /* flex-direction: row-reverse; */
+        padding: 1px;
+        background-image: url("https://picsum.photos/1080/1000?a=0");
+        background-repeat: no-repeat;
+
+        background-size: 100px 100px;
+      }
+
+      main:hover {
+        background-color: black;
+      }
+
+      main div {
+        background-color: tomato;
+        padding: 5px;
+
+        border: 1px solid white;
+        /* flex-grow: 1; */
+      }
+
+      .a {
+        flex-grow: 1;
+      }
+
+      .b {
+        flex-grow: 2;
+      }
+      .c {
+        flex-grow: 2;
+      }
+
+      header {
+        background-color: dodgerblue;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      header ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+      }
+
+      ul li {
+        margin: 5px;
+        color: white;
+      }
+
+      .header-icon {
+        display: none;
+        font-size: 20px;
+      }
+
+      @media (max-width: 400px) {
+        .right {
+          display: none;
+        }
+
+        .header-icon {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <ul>
+        <li>Home</li>
+      </ul>
+      <ul class="right">
+        <li>Login</li>
+        <li>Logout</li>
+        <li>Profile</li>
+      </ul>
+      <ul class="header-icon">
+        <li><i class="fa fa-bars" aria-hidden="true"></i></li>
+      </ul>
+    </header>
+
+    <main>
+      <div class="a">1</div>
+      <div class="b">2</div>
+      <div>3</div>
+      <div class="c">4</div>
+      <div>5</div>
+      <div>6</div>
+    </main>
+  </body>
+</html>
+
+<script>
+  document.querySelector(".header-icon").addEventListener("click", () => {
+    console.log("CLicked");
+
+    const header = document.querySelector("header");
+    const right = document.querySelector(".right");
+    const left = document.querySelector(".ul");
+
+    header.style.display = "block";
+    right.style.display = "block";
+    left.style.display = "block";
+  });
+</script>

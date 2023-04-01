@@ -1,0 +1,57 @@
+body {
+  background-color: rgb(56, 52, 52);
+  color: rgb(204, 199, 199);
+}
+
+.outerdiv {
+  background-color: tomato;
+}
+
+/* .outerdiv p {
+  border: 1px solid white;
+  padding: 10px;
+} */
+.outerdiv > p {
+  border: 1px solid white;
+  padding: 10px;
+}
+.outerdiv div p {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+}
+
+input[type="text"] {
+  color: red;
+}
+input[type="number"] {
+  color: blue;
+}
+
+/* #name {
+  color: black;
+  border: 1px solid red;
+}
+
+h1 {
+  color: white;
+  color: red;
+}
+
+.blue {
+  color: blue !important;
+  border: 1px solid blue;
+} */
+
+h1:nth-child(4) {
+  color: dodgerblue;
+}
+
+h1:last-child {
+  color: dodgerblue;
+}

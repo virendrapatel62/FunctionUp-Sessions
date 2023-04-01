@@ -1,0 +1,75 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "name": "Virendra",
+      "email": "string",
+      "password": "string",
+      "type": "staff|admin|student"
+    }
+  ],
+  "enrollments": [
+    {
+      "user": 1,
+      "course": 99
+    },
+    {
+      "user": 2,
+      "course": 99,
+      "validityType": "limited|lifetime",
+      "validTill": ""
+    },
+    {
+      "user": 2,
+      "course": 101,
+      "createdAt": "",
+      "validTill": "2-apr-2024"
+    }
+  ],
+  "courses": [
+    {
+      "id": 99,
+      "title": "Expresss jS",
+      "details": "here you will learn....",
+      "author": "Virendra",
+      "duration": 20,
+      "price": 999,
+      "discount": 20,
+      "thumbnail": "image.io/JHDJSH"
+    },
+    {
+      "id": 101,
+      "title": "React jS",
+      "details": "here you will learn....",
+      "author": "Virendra",
+      "duration": 20,
+      "price": 999,
+      "discount": 20,
+      "thumbnail": "image.io/JHDJSH"
+    }
+  ],
+  "videos": [
+    {
+      "id": 1,
+      "tittle": "Introduction To Expresss",
+      "description": "",
+      "course": 99,
+      "index": 0
+    },
+    {
+      "id": 100,
+      "tittle": "Introduction To Hooks",
+      "description": "",
+      "course": 101,
+      "index": 0
+    },
+    {
+      "id": 2,
+      "tittle": "Introduction To React",
+      "description": "",
+      "videoUrl": "/youtube.bedsfs",
+      "course": 101,
+      "index": 1
+    }
+  ]
+}

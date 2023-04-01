@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      :root {
+        font-size: 20px;
+      }
+      body {
+        border: 1px solid tomato;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        border: 1px solid rgb(165, 164, 164);
+        border-radius: 10px;
+        /* padding: 1px 20px; */
+        padding: 1rem 1rem 0.5rem 2rem;
+        margin: 10px;
+        font-size: 1rem;
+      }
+
+      main {
+        background-color: dodgerblue;
+        padding: 10px;
+        color: white;
+        border-radius: 10px;
+        margin: 4px;
+      }
+
+      main span {
+        font-size: 1rem;
+      }
+
+      main h1 {
+        font-size: 2rem;
+      }
+      @media (max-width: 400px) {
+        :root {
+          font-size: 10px;
+        }
+      }
+
+      .a {
+        height: 100px;
+        width: 500px;
+        background-color: tomato;
+      }
+
+      .b {
+        background-color: dodgerblue;
+        width: 50%;
+        display: inline;
+      }
+      .c {
+        background-color: dodgerblue;
+        width: 50%;
+      }
+
+      table {
+        background-color: lightpink;
+        width: 100%;
+      }
+
+      td:nth-child(1) {
+        width: 50%;
+      }
+      td:nth-child(2) {
+      }
+
+      section {
+        height: 500px;
+        background-color: lightgray;
+      }
+
+      .div-1 {
+        background-color: tomato;
+        height: 50%;
+      }
+      .div-1 > div {
+        background-color: dodgerblue;
+        height: 100px;
+        width: 60%;
+        float: left;
+      }
+      .div-1 > div:nth-child(2) {
+        float: right;
+        width: 60%;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="div-1">
+        <div></div>
+        <div></div>
+      </div>
+    </section>
+
+    <!-- <table>
+      <tr>
+        <td>Hello</td>
+        <td>World</td>
+      </tr>
+    </table> -->
+
+    <!-- <main>
+      <span>Span</span>
+      <h1>Hello World.</h1>
+    </main>
+    <ul>
+      <li>50px Lorem ipsum dolor sit amet. 20px</li>
+      <li>Sit et incidunt cumque numquam.</li>
+      <li>Voluptatibus dolorum quas amet nihil.</li>
+      <li>Corporis incidunt repellat quisquam reiciendis!</li>
+      <li>Accusamus corrupti eligendi tenetur ullam.</li>
+      <li>Necessitatibus repudiandae provident modi rerum!</li>
+      <li>Architecto officia iste quae alias!</li>
+      <li>Voluptatem veniam ipsam iusto velit.</li>
+      <li>Nemo nobis quo asperiores voluptates.</li>
+      <li>Nesciunt odio repudiandae suscipit natus.</li>
+    </ul> -->
+  </body>
+</html>
