@@ -1,0 +1,36 @@
+.red {
+  color: tomato;
+  border: 1px solid tomato;
+  padding: 5px;
+  border-radius: 10px;
+}
+.green {
+  border: 1px solid green;
+  padding: 5px;
+  border-radius: 10px;
+  color: green;
+}
+.info {
+  border: 1px solid rgb(42, 117, 174);
+  padding: 5px;
+  border-radius: 10px;
+  color: rgb(21, 82, 162);
+}
+
+.alert {
+  display: flex;
+  justify-content: space-between;
+}
+
+ul {
+  padding: 0;
+}
+
+ul li {
+  padding: 0;
+  list-style: none;
+  border: 1px solid rgb(42, 117, 174);
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
