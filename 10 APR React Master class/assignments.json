@@ -1,6 +1,6 @@
 {
   "1": [
-    "create state ,store number , genrate table ",
+    "create state ,store number , Generate table ",
     "cerate a button , update state with random value, update table"
   ],
 
@@ -14,5 +14,10 @@
       { "time": "", "eventName": "out or in" },
       { "time": "", "eventName": "out or in" }
     ]
+  ],
+  "3": [
+    "create an array with multiple greetings",
+    "create a button and handle click on button ",
+    "show the next greeting message on h1"
   ]
 }
