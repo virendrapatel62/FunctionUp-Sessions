@@ -34,3 +34,26 @@ ul li {
   padding: 10px;
   border-radius: 10px;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr,
+th,
+td {
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+.lightyellow {
+  background-color: lightyellow;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+
+  cursor: pointer;
+}

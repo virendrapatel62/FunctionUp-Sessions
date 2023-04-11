@@ -19,5 +19,11 @@
     "create an array with multiple greetings",
     "create a button and handle click on button ",
     "show the next greeting message on h1"
+  ],
+  "4": [
+    "getposts form https://jsonplaceholder.typicode.com/posts",
+    "show on table",
+    "add remove button",
+    "delete post when click on remove button"
   ]
 }
