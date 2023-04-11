@@ -48,7 +48,8 @@ td {
 }
 
 .lightyellow {
-  background-color: lightyellow;
+  background-color: tomato;
+  color: white;
 }
 
 .actions {
@@ -56,4 +57,8 @@ td {
   justify-content: center;
 
   cursor: pointer;
+}
+
+#search {
+  width: 90%;
 }

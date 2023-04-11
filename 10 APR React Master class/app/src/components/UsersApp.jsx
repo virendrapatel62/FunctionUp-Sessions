@@ -1,17 +1,25 @@
 import axios from "axios";
 import { Message } from "./Message";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const url = "https://jsonplaceholder.typicode.com/users";
 
 export function UsersApp() {
   const [users, setUsers] = useState([]);
+  const [rawUsers, setRawUsers] = useState([]);
+  const [inputValue, setInputValue] = useState("");
   const [isVisible, setIsVisible] = useState(
     JSON.parse(localStorage.getItem("table-visibility"))
   );
+  const [searchSting, setSearchString] = useState("Cl");
+
+  console.log("Reernding User App");
+  const limitRef = useRef();
+  const buttonClickCountRef = useRef(0);
 
   useEffect(() => {
     axios.get(url).then((response) => {
+      setRawUsers(response.data);
       setUsers(response.data);
     });
   }, []);
@@ -30,28 +38,70 @@ export function UsersApp() {
     setUsers([...users]);
   };
 
+  const filterResults = () => {
+    const limit = +limitRef.current.value;
+    setUsers(rawUsers.slice(0, limit));
+    buttonClickCountRef.current += 1;
+    // setUsers(rawUsers.slice(0, +inputValue));
+  };
+
+  //   useEffect(() => {
+  //     setUsers(rawUsers.slice(0, +inputValue));
+  //   }, [inputValue]);
+
+  function filterUsers(event) {
+    const search = event.target.value;
+    setSearchString(search);
+
+    // setUsers(rawUsers.filter((user) => user.name.includes(search)));
+  }
+
   return (
     <div>
+      <button
+        onClick={() => {
+          alert(buttonClickCountRef.current);
+        }}
+      >
+        Show Button {buttonClickCountRef.current}
+      </button>
       <h1>Users App</h1>
 
-      <div>
-        Show Table :{" "}
-        <input
-          onChange={toggleTable}
-          checked={isVisible}
-          type="checkbox"
-          name=""
-          id=""
-        />
-      </div>
+      <VisibilityControl toggleTable={toggleTable} value={isVisible} />
+
       <hr />
 
+      <div>
+        <input ref={limitRef} type="number" placeholder="5" />
+        {/* <input
+          onChange={(event) => {
+            setInputValue(event.target.value);
+          }}
+          type="number"
+          value={inputValue}
+          placeholder="5"
+        /> */}
+        <button onClick={filterResults}>Show</button>
+      </div>
+
+      <hr />
+      <input
+        onChange={filterUsers}
+        id="search"
+        placeholder="Search Something"
+      />
+
+      <hr />
       {isVisible && (
         <div>
           {users.length == 0 ? (
             <Message message="Loading...." />
           ) : (
-            <UserTable onRemove={removeUser} users={users} />
+            <UserTable
+              search={searchSting}
+              onRemove={removeUser}
+              users={users}
+            />
           )}
         </div>
       )}
@@ -59,11 +109,28 @@ export function UsersApp() {
   );
 }
 
+function VisibilityControl(props) {
+  return (
+    <div>
+      Show Table :{" "}
+      <input
+        onChange={props.toggleTable}
+        checked={props.value}
+        type="checkbox"
+        name=""
+        id=""
+      />
+    </div>
+  );
+}
+
 function UserTable(props) {
-  const { users, onRemove } = props;
+  const { users, onRemove, search } = props;
+
+  console.log("Re redning.. Table");
 
   useEffect(() => {
-    console.log("User Table Mounted");
+    // console.log("User Table Mounted");
 
     return () => {
       console.log("User Table Un mounted..");
@@ -84,6 +151,7 @@ function UserTable(props) {
       <tbody>
         {users.map((user, index) => (
           <UserRow
+            search={search}
             onRemove={() => onRemove(index)}
             key={user.id}
             user={user}
@@ -96,10 +164,10 @@ function UserTable(props) {
 }
 
 function UserRow(props) {
-  const { onRemove, user } = props;
+  const { onRemove, user, search } = props;
 
   useEffect(() => {
-    console.log("User Row Mounted", user.id);
+    // console.log("User Row Mounted", user.id);
 
     // let interval = null;
     // interval = setInterval(() => {
@@ -115,10 +183,12 @@ function UserRow(props) {
   return (
     <tr>
       <td>{props.sno}</td>
-      <td className={user.name.charAt(0) == "C" ? "lightyellow" : ""}>
+      <td className={user.name.includes(search) ? "lightyellow" : ""}>
         {user.name}
       </td>
-      <td>{user.email}</td>
+      <td className={user.email.includes(search) ? "lightyellow" : ""}>
+        {user.email}
+      </td>
       <td onClick={onRemove} className="actions">
         ❌
       </td>
