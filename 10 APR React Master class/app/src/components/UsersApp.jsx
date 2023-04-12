@@ -1,118 +1,101 @@
 import axios from "axios";
 import { Message } from "./Message";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 const url = "https://jsonplaceholder.typicode.com/users";
 
+function calculateAvg(users = []) {
+  let total = 0;
+  console.log("Calculating  Avg");
+  users.forEach((user) => {
+    total += user.marks;
+  });
+
+  const avg = Number(total / users.length);
+
+  return avg ? avg.toFixed(2) : 0;
+}
+
 export function UsersApp() {
   const [users, setUsers] = useState([]);
-  const [rawUsers, setRawUsers] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const [isVisible, setIsVisible] = useState(
-    JSON.parse(localStorage.getItem("table-visibility"))
-  );
-  const [searchSting, setSearchString] = useState("Cl");
+  const [isVisible, setIsVisible] = useState(true);
 
-  console.log("Reernding User App");
-  const limitRef = useRef();
-  const buttonClickCountRef = useRef(0);
+  console.log("UsersApp Rendering : XYZ");
+
+  // const [average, setAverage] = useState(0);
+
+  // useEffect(() => {
+  //   setAverage(calculateAvg(users));
+  // }, [users]);
+
+  const average = useMemo(() => {
+    return calculateAvg(users);
+  }, [users]);
+
+  console.log({ average });
 
   useEffect(() => {
     axios.get(url).then((response) => {
-      setRawUsers(response.data);
-      setUsers(response.data);
+      let users = response.data;
+      users = users.map((user) => {
+        user.marks = Math.round(Math.random() * 100);
+        return user;
+      });
+      setUsers(users);
     });
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("table-visibility", isVisible);
-  }, [isVisible]);
 
   const toggleTable = (event) => {
     const isChecked = event.target.checked;
     setIsVisible(isChecked);
   };
 
-  const removeUser = (index) => {
-    users.splice(index, 1);
-    setUsers([...users]);
-  };
-
-  const filterResults = () => {
-    const limit = +limitRef.current.value;
-    setUsers(rawUsers.slice(0, limit));
-    buttonClickCountRef.current += 1;
-    // setUsers(rawUsers.slice(0, +inputValue));
-  };
-
-  //   useEffect(() => {
-  //     setUsers(rawUsers.slice(0, +inputValue));
-  //   }, [inputValue]);
-
-  function filterUsers(event) {
-    const search = event.target.value;
-    setSearchString(search);
-
-    // setUsers(rawUsers.filter((user) => user.name.includes(search)));
-  }
+  const removeUser = useCallback((id) => {
+    setUsers((users) => {
+      users.splice(
+        users.findIndex((u) => u.id == id),
+        1
+      );
+      return [...users];
+    });
+  }, []);
 
   return (
     <div>
-      <button
-        onClick={() => {
-          alert(buttonClickCountRef.current);
-        }}
-      >
-        Show Button {buttonClickCountRef.current}
-      </button>
       <h1>Users App</h1>
+
+      <h1>Marks Avg : {average}</h1>
 
       <VisibilityControl toggleTable={toggleTable} value={isVisible} />
 
       <hr />
 
-      <div>
-        <input ref={limitRef} type="number" placeholder="5" />
-        {/* <input
-          onChange={(event) => {
-            setInputValue(event.target.value);
-          }}
-          type="number"
-          value={inputValue}
-          placeholder="5"
-        /> */}
-        <button onClick={filterResults}>Show</button>
-      </div>
-
       <hr />
-      <input
-        onChange={filterUsers}
-        id="search"
-        placeholder="Search Something"
-      />
-
-      <hr />
-      {isVisible && (
+      {isVisible && <h1>User Table Heading..</h1>}
+      {
         <div>
           {users.length == 0 ? (
             <Message message="Loading...." />
           ) : (
-            <UserTable
-              search={searchSting}
-              onRemove={removeUser}
-              users={users}
-            />
+            <UserTable onRemove={removeUser} users={users} />
           )}
         </div>
-      )}
+      }
     </div>
   );
 }
 
 function VisibilityControl(props) {
+  console.log("VisibilityControl Rendering");
   return (
     <div>
-      Show Table :{" "}
+      Toggle Heading :{" "}
       <input
         onChange={props.toggleTable}
         checked={props.value}
@@ -124,14 +107,14 @@ function VisibilityControl(props) {
   );
 }
 
-function UserTable(props) {
-  const { users, onRemove, search } = props;
+const UserTable = React.memo(_UserTable);
 
-  console.log("Re redning.. Table");
+function _UserTable(props) {
+  const { users, onRemove } = props;
+
+  console.log("UserTable Rendring.");
 
   useEffect(() => {
-    // console.log("User Table Mounted");
-
     return () => {
       console.log("User Table Un mounted..");
     };
@@ -144,54 +127,40 @@ function UserTable(props) {
           <th>Sno.</th>
           <th>UserName</th>
           <th>email</th>
+          <th>Marks</th>
           <th>Actions</th>
         </tr>
       </thead>
 
       <tbody>
         {users.map((user, index) => (
-          <UserRow
-            search={search}
-            onRemove={() => onRemove(index)}
-            key={user.id}
-            user={user}
-            sno={index + 1}
-          />
+          <UserRow onRemove={() => onRemove(user.id)} key={index} user={user} />
         ))}
       </tbody>
     </table>
   );
 }
 
-function UserRow(props) {
-  const { onRemove, user, search } = props;
+const UserRow = React.memo(function UserRow(props) {
+  const { onRemove, user } = props;
+
+  console.log("User Row Rendering");
 
   useEffect(() => {
-    // console.log("User Row Mounted", user.id);
-
-    // let interval = null;
-    // interval = setInterval(() => {
-    //   console.log("User 1", user.id);
-    // }, 1000);
-
     return () => {
-      //   clearInterval(interval);
       console.log("User Row Un mounted..", user.id);
     };
   }, []);
 
   return (
     <tr>
-      <td>{props.sno}</td>
-      <td className={user.name.includes(search) ? "lightyellow" : ""}>
-        {user.name}
-      </td>
-      <td className={user.email.includes(search) ? "lightyellow" : ""}>
-        {user.email}
-      </td>
+      <td>{user.id}</td>
+      <td>{user.name}</td>
+      <td>{user.email}</td>
+      <td>{user.marks}</td>
       <td onClick={onRemove} className="actions">
         ❌
       </td>
     </tr>
   );
-}
+});

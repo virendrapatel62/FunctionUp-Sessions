@@ -62,3 +62,13 @@ td {
 #search {
   width: 90%;
 }
+
+label {
+  display: block;
+  margin: 10px;
+}
+
+input,
+select {
+  margin: 10px;
+}
