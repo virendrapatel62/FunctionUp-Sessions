@@ -25,23 +25,35 @@ const studentReducer = (student, action) => {
     return `My name is ${name} and age is ${age}`;
   };
 
-  if (type == "NAME_CHANGE") {
-    return {
-      ...student,
-      name: payload,
-      message: getMessage(payload, student.age),
-    };
-  }
+  switch (type) {
+    case "NAME_CHANGE": {
+      return {
+        ...student,
+        name: payload,
+        message: getMessage(payload, student.age),
+      };
+    }
+    case "AGE_CHANGE": {
+      return {
+        ...student,
+        age: payload,
+        message: getMessage(student.name, payload),
+      };
+    }
+    case "ADDRESS_CHANGE": {
+      return {
+        ...student,
+        address: payload,
+      };
+    }
+    case "RESET": {
+      return {};
+    }
 
-  if (type === "AGE_CHANGE") {
-    return {
-      ...student,
-      age: payload,
-      message: getMessage(student.name, payload),
-    };
+    default: {
+      return student;
+    }
   }
-
-  return student;
 };
 
 export default function ReducerExample() {
@@ -68,19 +80,6 @@ export default function ReducerExample() {
     op("INC");
   };
 
-  const onNameChange = ({ target: { value } }) => {
-    studentDispatch({
-      type: "NAME_CHANGE",
-      payload: value,
-    });
-  };
-  const onAgeChange = ({ target: { value } }) => {
-    studentDispatch({
-      type: "AGE_CHANGE",
-      payload: +value,
-    });
-  };
-
   return (
     <div>
       <button onClick={inc}>Plus +1</button>
@@ -90,23 +89,78 @@ export default function ReducerExample() {
 
       <hr />
 
-      <table>
-        <tr>
-          <td colSpan={2}>{student.message}</td>
-        </tr>
-        <tr>
-          <td>{student.name}</td>
-          <td>
-            <input onChange={onNameChange} type="text" name="" id="" />
-          </td>
-        </tr>
-        <tr>
-          <td>{student.age}</td>
-          <td>
-            <input onChange={onAgeChange} type="number" name="" id="" />
-          </td>
-        </tr>
-      </table>
+      <StudentTable
+        student={student}
+        // onAgeChange={onAgeChange}
+        // onNameChange={onNameChange}
+        dispatch={studentDispatch}
+      />
     </div>
   );
 }
+
+const StudentTable = React.memo(({ student, dispatch }) => {
+  console.log("Student table Render");
+
+  const onNameChange = ({ target: { value } }) => {
+    dispatch({
+      type: "NAME_CHANGE",
+      payload: value,
+    });
+  };
+  const onAgeChange = ({ target: { value } }) => {
+    dispatch({
+      type: "AGE_CHANGE",
+      payload: +value,
+    });
+  };
+
+  return (
+    <table>
+      <tr>
+        <td colSpan={2}>{student.message}</td>
+      </tr>
+      <tr>
+        <td colSpan={2}>
+          <button
+            onClick={() => {
+              dispatch({
+                type: "RESET",
+              });
+            }}
+          >
+            Clear Student
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>{student.name}</td>
+        <td>
+          <input onChange={onNameChange} type="text" name="" id="" />
+        </td>
+      </tr>
+      <tr>
+        <td>{student.age}</td>
+        <td>
+          <input onChange={onAgeChange} type="number" name="" id="" />
+        </td>
+      </tr>
+      <tr>
+        <td>{student.address}</td>
+        <td>
+          <input
+            onChange={(event) =>
+              dispatch({
+                type: "ADDRESS_CHANGE",
+                payload: event.target.value,
+              })
+            }
+            type="text"
+            name=""
+            id=""
+          />
+        </td>
+      </tr>
+    </table>
+  );
+});
