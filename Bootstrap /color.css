@@ -1,0 +1,19 @@
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+.bg-red {
+  background-color: red;
+}
+
+.light {
+  color: white;
+}
