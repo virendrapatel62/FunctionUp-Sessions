@@ -1,109 +1,51 @@
-import { Fragment, useState } from "react";
-import reactLogo from "./assets/react.svg";
+import { TextField } from "@mui/material";
 import "./App.css";
-import {
-  Button,
-  TextField,
-  Box,
-  Paper,
-  Snackbar,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-} from "@mui/material";
 
-import MenuIcon from "@mui/icons-material/Menu";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-function App() {
-  const [open, setOpen] = useState(false);
-  const [show, setShow] = useState(false);
+function Home() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loginSuccesss = JSON.parse(localStorage.getItem("login-success"));
+
+    if (!loginSuccesss) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <div>
-      <div>
-        <Box>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton
-                onClick={() => {
-                  setShow(!show);
-                }}
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
+      <h1>Home</h1>
+      <Link to={"/login"}>Login</Link>
+    </div>
+  );
+}
 
-              {show && (
-                <Fragment>
-                  <Button color="inherit">Login</Button>
-                  <Button color="inherit">Login</Button>
-                  <Button color="inherit">Login</Button>
-                  <Button color="inherit">Login</Button>
-                  <Button color="inherit">Login</Button>
-                </Fragment>
-              )}
-            </Toolbar>
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to={"/shop"} />}></Route>
+      <Route path="/shop" element={<Home />}></Route>
+      <Route path="/login" element={<Login />}></Route>
+    </Routes>
+  );
+}
 
-            {!show && (
-              <Fragment>
-                <Button color="inherit">Login</Button>
-                <Button color="inherit">Login</Button>
-                <Button color="inherit">Login</Button>
-                <Button color="inherit">Login</Button>
-                <Button color="inherit">Login</Button>
-              </Fragment>
-            )}
-          </AppBar>
-        </Box>
-      </div>
+function Login() {
+  const navigate = useNavigate();
 
-      <Snackbar
-        open={open}
-        autoHideDuration={1000}
-        onClose={() => {
-          setOpen(false);
-        }}
-        message="Note archived"
-      />
+  useEffect(() => {
+    const loginSuccesss = JSON.parse(localStorage.getItem("login-success"));
 
-      <h1>Hello World..</h1>
+    if (loginSuccesss) {
+      navigate("/");
+    }
+  }, []);
 
-      <Paper
-        sx={{
-          padding: "10px",
-          margin: "10px",
-        }}
-      >
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa dicta
-          vel sit doloribus et iure praesentium vero laborum, perspiciatis
-          distinctio harum tempora earum impedit placeat velit fugiat
-          laudantium, maiores debitis?
-        </p>
-      </Paper>
-
-      <Button
-        onClick={() => {
-          setOpen(!open);
-        }}
-        color="error"
-        variant="contained"
-      >
-        Toggle Toast
-      </Button>
-      <Button color="info" variant="contained">
-        Click Here
-      </Button>
-      <Button color="success" variant="contained">
-        Click Here
-      </Button>
-      <hr />
-
+  return (
+    <div>
       <TextField
         variant="filled"
         label="Email Address"
@@ -116,26 +58,22 @@ function App() {
       />
       <TextField
         variant="outlined"
-        label="Email Address"
-        placeholder="Email"
-        type="email"
+        type="password"
         fullWidth
         sx={{
           marginTop: "10px",
         }}
       />
-      <TextField
-        variant="standard"
-        label="Email Address"
-        placeholder="Email"
-        type="email"
-        fullWidth
-        sx={{
-          marginTop: "10px",
+
+      <button
+        onClick={() => {
+          localStorage.setItem("login-success", "true");
+          navigate("/");
         }}
-      />
+      >
+        Login
+      </button>
     </div>
   );
 }
-
 export default App;
