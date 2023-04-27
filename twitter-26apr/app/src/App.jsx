@@ -39,6 +39,17 @@ function Login() {
   useEffect(() => {
     const loginSuccesss = JSON.parse(localStorage.getItem("login-success"));
 
+    fetch("/tweet.json")
+      .then((response) => response.json())
+      .then((twwets) => {
+        console.log(twwets);
+      });
+    fetch("/users.json")
+      .then((response) => response.json())
+      .then((twwets) => {
+        console.log(twwets);
+      });
+
     if (loginSuccesss) {
       navigate("/");
     }
