@@ -15,10 +15,19 @@ function Home() {
     }
   }, []);
 
+  const images = new Array(1000).fill(0).map((x, index) => {
+    return `https://picsum.photos/1000/500?q=${index}`;
+  });
+
+  console.log(images);
+
   return (
     <div>
       <h1>Home</h1>
       <Link to={"/login"}>Login</Link>
+      {images.map((image, index) => {
+        return <img key={index} src={image} style={{ width: "100px" }} />;
+      })}
     </div>
   );
 }
