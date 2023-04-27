@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import "./App.css";
 
 import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
@@ -23,6 +23,23 @@ function Home() {
 
   return (
     <div>
+      <section>
+        <Grid container>
+          <Grid item xs={12}>
+            <div className="b">header</div>
+          </Grid>
+          <Grid h1 xs={3}>
+            <div className="h-200 t">sidebar</div>
+          </Grid>
+          <Grid h1 xs={6}>
+            <div className="h-200 b">main content</div>
+          </Grid>
+          <Grid h1 xs={3}>
+            <div className="h-200 t">right Content</div>
+          </Grid>
+        </Grid>
+      </section>
+
       <h1>Home</h1>
       <Link to={"/login"}>Login</Link>
       {images.map((image, index) => {
