@@ -1,0 +1,13 @@
+.actions {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.editor {
+  min-height: 80vh;
+  border: 1px solid gray;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 2px;
+}
